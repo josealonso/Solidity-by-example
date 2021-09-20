@@ -34,8 +34,10 @@ contract ReceiveEther {
     // Function to receive Ether. msg.data must be empty
     receive() external payable {}
 
-    // Fallback function is called when msg.data is not empty
-    fallback() external payable {}
+    /* fallback is executed either when a function that does not exist is called or when Ether is sent directly to a contract but receive() does not exist or msg.data is not empty */
+    fallback() external payable {
+        emit Log(gasleft());
+    }
 
     function getBalance() public view returns (uint) {
         return address(this).balance;
